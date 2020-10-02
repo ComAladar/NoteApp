@@ -8,5 +8,6 @@ namespace NoteApp
 {
     public class Class1
     {
+        //Комментарий для ЛР1
     }
 }
