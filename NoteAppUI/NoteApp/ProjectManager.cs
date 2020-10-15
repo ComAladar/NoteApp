@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
-    public class Class1
+    public static class ProjectManager
     {
-        //Комментарий для ЛР1
     }
 }

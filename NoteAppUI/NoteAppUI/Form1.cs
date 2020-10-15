@@ -16,6 +16,32 @@ namespace NoteAppUI
         public Form1()
         {
             InitializeComponent();
+            comboBox1.DataSource = Enum.GetValues(typeof(NoteCategories));
+            Project project=new Project();
+            //listBox1.Items.AddRange();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+ 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Note notenew=new Note();
+            notenew.Name = "Имя";
+            notenew.NoteText = "Текст";
+            notenew.Categories = NoteCategories.Miscellanea;
+
         }
     }
 }
