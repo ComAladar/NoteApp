@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
+    /// <summary>
+    /// Интерфейс клонирования заметок.
+    /// </summary>
     interface CloneInterface
     {
 

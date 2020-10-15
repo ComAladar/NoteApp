@@ -18,7 +18,6 @@ namespace NoteAppUI
             InitializeComponent();
             comboBox1.DataSource = Enum.GetValues(typeof(NoteCategories));
             Project project=new Project();
-            //listBox1.Items.AddRange();
         }
 
         private void Form1_Load(object sender, EventArgs e)
