@@ -8,96 +8,114 @@ using System.Threading.Tasks;
 namespace NoteApp
 {
     /// <summary>
-    /// Класс Заметки(Записи).Хранит основную информацию о заметке: имя, категорию заметки, текст заметки, Время создания заметки и время последнего изменения заметки.
+    /// Класс Заметки.Хранит основную информацию о заметке.
     /// </summary>
-    public class Note
+    public class Note:ICloneable
     {
         private string _name; 
-        private NoteCategories _categories; 
-        private string _notetext;
-        private readonly DateTime _timeofcreation=DateTime.Now;
-        private DateTime _timeofedit=DateTime.Now; 
+        private NoteCategory _category; 
+        private string _text;
+        private readonly DateTime _creationtime=DateTime.Now;
+        private DateTime _modifiedtime=DateTime.Now; 
 
         /// <summary>
-        /// Возвращает и задает названия заметки.
-        /// <exception cref="_name">Не может быть больше 50 символов.</exception>
+        /// Возвращает и задает название заметки.
+        /// <exception cref="ArgumentException">Не может быть больше 50 символов.</exception>
         /// </summary>
         public string Name
         {
-            get { return _name; }
+            get
+            {
+                return _name;
+            }
             set
             {
-                if (value.Length >= 50)
+                if (value.Length > 50)
                 {
                     throw new ArgumentException("Максимальная длина названия записи должна быть не больше 50 символов.");
                 }
                 else
                 {
-                    TimeOfEdit = DateTime.Now;
                     if (value == String.Empty) 
                     {
                         _name = "Без Названия";
                     }
                     else _name = value;
+                    ModifiedTime = DateTime.Now;
                 }
             }
-
         }
+
         /// <summary>
         /// Возвращает и задает значение категории.
         /// </summary>
-        public NoteCategories Categories
+        public NoteCategory Category
         {
-            get { return _categories; }
+            get
+            {
+                return _category;
+            }
             set
             {
-                TimeOfEdit = DateTime.Now;
-                _categories = value;
+                _category = value;
+                ModifiedTime = DateTime.Now;
             }
         }
+
         /// <summary>
         /// Возвращает и задает значение текста.
         /// </summary>
-        public string NoteText
+        public string Text
         {
-            get { return _notetext; }
+            get
+            {
+                return _text;
+            }
             set
             {
                 if (value == String.Empty)
                 {
-                    _notetext = "Введите текст.";
+                    _text = "Введите текст.";
                 }
                 else
                 {
-                    TimeOfEdit = DateTime.Now;
-                    _notetext = value;
+                    _text = value;
                 }
-
-                
+                ModifiedTime = DateTime.Now;
             }
-
         }
         
         /// <summary>
-        /// Задает и возвращает последнее время редактирования заметки.
+        /// Возвращает и задает последнее время редактирования заметки.
         /// </summary>
-        public DateTime TimeOfEdit
+        public DateTime ModifiedTime
         {
-            get { return _timeofedit;}
+            get
+            {
+                return _modifiedtime;
+            }
             set
             {
-                _timeofedit=DateTime.Now;
-
+                _modifiedtime = DateTime.Now;
             }
-
         }
+
         /// <summary>
-        /// Возвращает время создания файла.
+        /// Возвращает время создания заметки.
         /// </summary>
-        public DateTime TimeOfCreation
+        public DateTime CreationTime
         {
-            get { return _timeofcreation; }
+            get { return _creationtime; }
         }
 
+        public object Clone()
+        {
+            return new Note()
+            {
+                Name = this.Name,
+                Text = this.Text,
+                Category = this.Category
+            };
+        }
     }
 }

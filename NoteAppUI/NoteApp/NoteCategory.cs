@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace NoteApp
 {
     /// <summary>
-    /// Перечисление категорий заметки. Могут быть:All,Work,Home,HealthAndSport,People,Documents,Finances,Miscellanea.
+    /// Перечисление категорий заметки.
     /// </summary>
-    public enum NoteCategories
+    public enum NoteCategory
     {
         All,
         Work,

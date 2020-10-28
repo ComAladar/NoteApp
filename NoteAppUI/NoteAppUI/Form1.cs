@@ -16,8 +16,8 @@ namespace NoteAppUI
         public Form1()
         {
             InitializeComponent();
-            comboBox1.DataSource = Enum.GetValues(typeof(NoteCategories));
-            Project project=new Project();
+            comboBox1.DataSource = Enum.GetValues(typeof(NoteCategory));
+            var project = new Project();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,11 +36,25 @@ namespace NoteAppUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Note notenew=new Note();
+            var notenew = new Note();
             notenew.Name = "Имя";
-            notenew.NoteText = "Текст";
-            notenew.Categories = NoteCategories.Miscellanea;
+            notenew.Text = "Текст";
+            notenew.Category = NoteCategory.Miscellanea;
+            textBox1.Text = notenew.Name;
+            textBox2.Text= notenew.Category.ToString();
+            textBox3.Text = notenew.Text;
+            textBox4.Text = notenew.CreationTime.ToString();
+            textBox5.Text =notenew.ModifiedTime.ToString();
+            var project = new Project();
+            project.Notes.Add(notenew);
+            ProjectManager.SaveToFile(project,ProjectManager.DefaultFilePath);
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var project1 = new Project();
+            var notenewdisp = new Note();
+            project1=ProjectManager.LoadFromFile(ProjectManager.DefaultFilePath);
         }
     }
 }
