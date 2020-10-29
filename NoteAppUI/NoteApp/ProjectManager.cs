@@ -59,6 +59,10 @@ namespace NoteApp
             {
                 SaveToFile(project,DefaultFilePath);
             }
+            catch (FileNotFoundException)
+            {
+                SaveToFile(project, DefaultFilePath);
+            }
             return project;
         }
 

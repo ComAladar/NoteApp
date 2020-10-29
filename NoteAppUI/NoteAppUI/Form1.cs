@@ -36,10 +36,7 @@ namespace NoteAppUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var notenew = new Note();
-            notenew.Name = "Имя";
-            notenew.Text = "Текст";
-            notenew.Category = NoteCategory.Miscellanea;
+            var notenew = new Note("Имя","Текст",NoteCategory.Miscellanea);
             textBox1.Text = notenew.Name;
             textBox2.Text= notenew.Category.ToString();
             textBox3.Text = notenew.Text;
@@ -54,7 +51,8 @@ namespace NoteAppUI
         {
             var project1 = new Project();
             var notenewdisp = new Note();
-            project1=ProjectManager.LoadFromFile(ProjectManager.DefaultFilePath);
+            project1.Notes.Add(notenewdisp);
+            project1 =ProjectManager.LoadFromFile(ProjectManager.DefaultFilePath);
         }
     }
 }

@@ -117,5 +117,17 @@ namespace NoteApp
                 Category = this.Category
             };
         }
+
+        public Note()
+        {
+
+        }
+
+        public Note(string name,string text,NoteCategory category)
+        {
+            Name = name;
+            Text = text;
+            Category = category;
+        }
     }
 }
