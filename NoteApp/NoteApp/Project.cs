@@ -11,18 +11,10 @@ namespace NoteApp
     /// </summary>
     public class Project
     {
-        private List<Note> _notes=new List<Note>();
-
-        public List<Note> Notes
-        {
-            get
-            {
-               return _notes;
-            }
-            set
-            {
-                _notes = value;
-            }
-        }
+        /// <summary>
+        /// Свойство Notes для создания списка заметок.
+        /// </summary>
+        public List<Note> Notes { get; set; } = new List<Note>();
+    
     }
 }

@@ -12,11 +12,26 @@ namespace NoteApp
     /// </summary>
     public class Note:ICloneable
     {
+        /// <summary>
+        /// Поле названия заметки.
+        /// </summary>
         private string _name; 
+        /// <summary>
+        /// Поле категории заметки.
+        /// </summary>
         private NoteCategory _category; 
+        /// <summary>
+        /// Поле текста заметки.
+        /// </summary>
         private string _text;
-        private readonly DateTime _creationtime=DateTime.Now;
-        private DateTime _modifiedtime=DateTime.Now; 
+        /// <summary>
+        /// Поле время создания заметки.
+        /// </summary>
+        private readonly DateTime _created=DateTime.Now;
+        /// <summary>
+        /// Поле время изменения заметки.
+        /// </summary>
+        private DateTime _modified=DateTime.Now; 
 
         /// <summary>
         /// Возвращает и задает название заметки.
@@ -41,7 +56,7 @@ namespace NoteApp
                         _name = "Без Названия";
                     }
                     else _name = value;
-                    ModifiedTime = DateTime.Now;
+                    Modified = DateTime.Now;
                 }
             }
         }
@@ -58,7 +73,7 @@ namespace NoteApp
             set
             {
                 _category = value;
-                ModifiedTime = DateTime.Now;
+                Modified = DateTime.Now;
             }
         }
 
@@ -81,31 +96,31 @@ namespace NoteApp
                 {
                     _text = value;
                 }
-                ModifiedTime = DateTime.Now;
+                Modified = DateTime.Now;
             }
         }
         
         /// <summary>
         /// Возвращает и задает последнее время редактирования заметки.
         /// </summary>
-        public DateTime ModifiedTime
+        public DateTime Modified
         {
             get
             {
-                return _modifiedtime;
+                return _modified;
             }
             set
             {
-                _modifiedtime = DateTime.Now;
+                _modified = DateTime.Now;
             }
         }
 
         /// <summary>
         /// Возвращает время создания заметки.
         /// </summary>
-        public DateTime CreationTime
+        public DateTime Created
         {
-            get { return _creationtime; }
+            get { return _created; }
         }
 
         public object Clone()
@@ -118,11 +133,17 @@ namespace NoteApp
             };
         }
 
-        public Note()
-        {
+        /// <summary>
+        /// Пустой конструктор класса Note.
+        /// </summary>
+        public Note() { }
 
-        }
-
+        /// <summary>
+        /// Конструктор класса Note с заданием названия, текста и категории.
+        /// </summary>
+        /// <param name="name">Название заметки.</param>
+        /// <param name="text">Текст заметки.</param>
+        /// <param name="category">Категория заметки.</param>
         public Note(string name,string text,NoteCategory category)
         {
             Name = name;

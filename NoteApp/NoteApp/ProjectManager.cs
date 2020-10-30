@@ -17,21 +17,20 @@ namespace NoteApp
         /// Путь до файла с данными о всех записях.
         /// </summary>
         public static string DefaultFilePath { get; set; }
-        /// <summary>
-        /// Путь до директории приложения.
-        /// </summary>
-        public static string DefaultDirectoryPath { get; set; }
 
         /// <summary>
         /// Метод выполняющий сериализацию записей.
         /// </summary>
         /// <param name="project">Класс проекта, хранящий все записи.</param>
-        /// <param name="path">Путь до файла, хранящего данные о записях.</param>
-        public static void SaveToFile(Project project, string path)
+        /// <param name="fullFilename">Путь до файла, хранящего данные о записях.</param>
+        public static void SaveToFile(Project project, string fullFilename)
         {
-            Directory.CreateDirectory(DefaultDirectoryPath);
+            Directory.CreateDirectory(Path.GetDirectoryName(fullFilename));
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(path))
+            serializer.NullValueHandling = NullValueHandling.Include;
+            serializer.TypeNameHandling = TypeNameHandling.All;
+            serializer.Formatting = Formatting.None;
+            using (StreamWriter sw = new StreamWriter(fullFilename))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, project);
@@ -41,27 +40,26 @@ namespace NoteApp
         /// <summary>
         /// Метод выполняющий десериализацию записей.
         /// </summary>
-        /// <param name="path">Путь до файла, хранящего данные о записях.</param>
+        /// <param name="fullFilename">Путь до файла, хранящего данные о записях.</param>
         /// <returns></returns>
-        public static Project LoadFromFile(string path)
+        public static Project LoadFromFile(string fullFilename)
         {
             Project project = new Project();
             try
             {
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamReader sr = new StreamReader(path))
+                serializer.NullValueHandling = NullValueHandling.Include;
+                serializer.TypeNameHandling = TypeNameHandling.All;
+                serializer.Formatting = Formatting.None;
+                using (StreamReader sr = new StreamReader(fullFilename))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     project = (Project)serializer.Deserialize<Project>(reader);
                 }
             }
-            catch (DirectoryNotFoundException)
+            catch (Exception)
             {
-                SaveToFile(project,DefaultFilePath);
-            }
-            catch (FileNotFoundException)
-            {
-                SaveToFile(project, DefaultFilePath);
+                return project;
             }
             return project;
         }
@@ -72,8 +70,6 @@ namespace NoteApp
         static ProjectManager()
         {
             DefaultFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+ @"\NoteApp\NoteAppInfo.notes";
-            DefaultDirectoryPath= Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NoteApp";
-            //DefaultPath += @"\NoteApp\Info.notes";
         }
     }
 }
