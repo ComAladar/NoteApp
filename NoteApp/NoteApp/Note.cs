@@ -60,7 +60,7 @@ namespace NoteApp
                         _name = "Без Названия";
                     }
                     else _name = value;
-                    Modified = DateTime.Now;
+                    _modified = DateTime.Now;
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace NoteApp
             set
             {
                 _category = value;
-                Modified = DateTime.Now;
+                _modified = DateTime.Now;
             }
         }
 
@@ -100,7 +100,7 @@ namespace NoteApp
                 {
                     _text = value;
                 }
-                Modified = DateTime.Now;
+                _modified = DateTime.Now;
             }
         }
         
@@ -109,14 +109,7 @@ namespace NoteApp
         /// </summary>
         public DateTime Modified
         {
-            get
-            {
-                return _modified;
-            }
-            set
-            {
-                _modified = DateTime.Now;
-            }
+            get { return _modified; }
         }
 
         /// <summary>
