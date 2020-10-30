@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NoteApp;
 
 namespace NoteAppUI
 {
@@ -15,6 +16,7 @@ namespace NoteAppUI
         public Form3()
         {
             InitializeComponent();
+            comboBox1.DataSource = Enum.GetValues(typeof(NoteCategory));
         }
 
         private void button1_Click(object sender, EventArgs e)

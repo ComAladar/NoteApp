@@ -16,18 +16,22 @@ namespace NoteApp
         /// Поле названия заметки.
         /// </summary>
         private string _name; 
+
         /// <summary>
         /// Поле категории заметки.
         /// </summary>
         private NoteCategory _category; 
+
         /// <summary>
         /// Поле текста заметки.
         /// </summary>
         private string _text;
+
         /// <summary>
         /// Поле время создания заметки.
         /// </summary>
         private readonly DateTime _created=DateTime.Now;
+
         /// <summary>
         /// Поле время изменения заметки.
         /// </summary>
