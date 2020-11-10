@@ -16,15 +16,15 @@ namespace NoteAppUI
         public Form3()
         {
             InitializeComponent();
-            comboBox1.DataSource = Enum.GetValues(typeof(NoteCategory));
+            CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ExitOKButton_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ExitCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }

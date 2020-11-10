@@ -16,8 +16,9 @@ namespace NoteAppUI
         public Form1()
         {
             InitializeComponent();
-            comboBox1.DataSource = Enum.GetValues(typeof(NoteCategory));
+            CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
             var project = new Project();
+            project = ProjectManager.LoadFromFile(ProjectManager.DefaultFilePath);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -25,73 +26,75 @@ namespace NoteAppUI
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var notenew = new Note("Имя","Текст",NoteCategory.Miscellanea);
-            textBox1.Text = notenew.Name;
-            textBox2.Text= notenew.Category.ToString();
-            textBox3.Text = notenew.Text;
-            textBox4.Text = notenew.Created.ToString();
-            textBox5.Text =notenew.Modified.ToString();
-            var project = new Project();
-            project.Notes.Add(notenew);
-            ProjectManager.SaveToFile(project,ProjectManager.DefaultFilePath);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            var project1 = new Project();
-            var notenewdisp = new Note();
-            project1.Notes.Add(notenewdisp);
-            project1 =ProjectManager.LoadFromFile(ProjectManager.DefaultFilePath);
-        }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void AddNoteButton_Click(object sender, EventArgs e)
         {
             Form3 f3 = new Form3();
             f3.ShowDialog();
+            /*
+            var notenew = new Note("Имя", "Текст", NoteCategory.Miscellanea);
+            var project = new Project();
+            project.Notes.Add(notenew);
+            ProjectManager.SaveToFile(project, ProjectManager.DefaultFilePath);
+            */
+        }
+
+        private void EditNoteButton_Click(object sender, EventArgs e)
+        {
+            Form3 f3 = new Form3();
+            f3.ShowDialog();
+            /*
+            var project1 = new Project();
+            var notenewdisp = new Note();
+            project1.Notes.Add(notenewdisp);
+            project1 = ProjectManager.LoadFromFile(ProjectManager.DefaultFilePath);
+            */
+        }
+
+        private void DeleteNoteButton_Click(object sender, EventArgs e)
+        {
+            Form3 f3 = new Form3();
+            f3.ShowDialog();
+        }
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult result=MessageBox.Show("Вы точно хотите выйти?","Выход", MessageBoxButtons.OKCancel,MessageBoxIcon.Exclamation);
-            if (result == DialogResult.OK)
-            {
-                this.Close();
-                //Application.Exit();
-            }
+            this.Close();
+
         }
 
         private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form3 f3 = new Form3();
-            f3.ShowDialog();
+            AddNoteButton_Click(sender, e);
         }
 
         private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form3 f3 = new Form3();
-            f3.ShowDialog();
+            EditNoteButton_Click(sender, e);
+
+        }
+
+        private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteNoteButton_Click(sender, e);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form2 f2=new Form2();
+            Form2 f2 = new Form2();
             f2.ShowDialog();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            DialogResult result = MessageBox.Show("Вы точно хотите выйти?", "Выход", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (result != DialogResult.OK)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
