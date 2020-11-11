@@ -30,7 +30,7 @@ namespace NoteApp
         /// <summary>
         /// Поле время создания заметки.
         /// </summary>
-        private readonly DateTime _created=DateTime.Now;
+        private DateTime _created=DateTime.Now;
 
         /// <summary>
         /// Поле время изменения заметки.
@@ -110,6 +110,7 @@ namespace NoteApp
         public DateTime Modified
         {
             get { return _modified; }
+            set { _modified = value; }
         }
 
         /// <summary>
@@ -118,6 +119,7 @@ namespace NoteApp
         public DateTime Created
         {
             get { return _created; }
+            set { _created = value; }
         }
 
         public object Clone()

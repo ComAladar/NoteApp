@@ -1,6 +1,6 @@
 ﻿namespace NoteAppUI
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,21 +95,21 @@
             // addNoteToolStripMenuItem
             // 
             this.addNoteToolStripMenuItem.Name = "addNoteToolStripMenuItem";
-            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.addNoteToolStripMenuItem.Text = "Add Note";
             this.addNoteToolStripMenuItem.Click += new System.EventHandler(this.addNoteToolStripMenuItem_Click);
             // 
             // editNoteToolStripMenuItem
             // 
             this.editNoteToolStripMenuItem.Name = "editNoteToolStripMenuItem";
-            this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.editNoteToolStripMenuItem.Text = "Edit Note";
             this.editNoteToolStripMenuItem.Click += new System.EventHandler(this.editNoteToolStripMenuItem_Click);
             // 
             // removeNoteToolStripMenuItem
             // 
             this.removeNoteToolStripMenuItem.Name = "removeNoteToolStripMenuItem";
-            this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.removeNoteToolStripMenuItem.Text = "Remove Note";
             this.removeNoteToolStripMenuItem.Click += new System.EventHandler(this.removeNoteToolStripMenuItem_Click);
             // 
@@ -137,6 +137,7 @@
             this.NotesListBox.Name = "NotesListBox";
             this.NotesListBox.Size = new System.Drawing.Size(255, 342);
             this.NotesListBox.TabIndex = 5;
+            this.NotesListBox.SelectedIndexChanged += new System.EventHandler(this.NotesListBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -207,9 +208,9 @@
             this.CategotyTextBox.Location = new System.Drawing.Point(328, 55);
             this.CategotyTextBox.Name = "CategotyTextBox";
             this.CategotyTextBox.ReadOnly = true;
-            this.CategotyTextBox.Size = new System.Drawing.Size(100, 13);
+            this.CategotyTextBox.Size = new System.Drawing.Size(137, 13);
             this.CategotyTextBox.TabIndex = 17;
-            this.CategotyTextBox.Text = "12345";
+            this.CategotyTextBox.Text = "Наименование Категории";
             // 
             // CreatedDateTimePicker
             // 
@@ -220,6 +221,7 @@
             this.CreatedDateTimePicker.Name = "CreatedDateTimePicker";
             this.CreatedDateTimePicker.Size = new System.Drawing.Size(109, 20);
             this.CreatedDateTimePicker.TabIndex = 18;
+            this.CreatedDateTimePicker.Value = new System.DateTime(2020, 11, 11, 18, 11, 47, 0);
             // 
             // ModifiedDateTimePicker
             // 
@@ -256,7 +258,7 @@
             this.NoteTitleTextBox.ReadOnly = true;
             this.NoteTitleTextBox.Size = new System.Drawing.Size(515, 13);
             this.NoteTitleTextBox.TabIndex = 21;
-            this.NoteTitleTextBox.Text = "12345678901234567890123456789012345678901234567890=50 СИМВОЛОВ\r\n\r\n";
+            this.NoteTitleTextBox.Text = "Название Заметки";
             // 
             // DeleteNoteButton
             // 

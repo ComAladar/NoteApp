@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace NoteAppUI
 {
-    public partial class Form2 : Form
+    public partial class AboutForm : Form
     {
-        public Form2()
+        public AboutForm()
         {
             InitializeComponent();
         }

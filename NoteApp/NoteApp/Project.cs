@@ -15,6 +15,5 @@ namespace NoteApp
         /// Свойство Notes для создания списка заметок.
         /// </summary>
         public List<Note> Notes { get; set; } = new List<Note>();
-    
     }
 }
