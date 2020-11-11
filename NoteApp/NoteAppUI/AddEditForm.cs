@@ -75,5 +75,15 @@ namespace NoteAppUI
             IsOK = false;
             this.Close();
         }
+
+        private void TitleTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string text = TitleTextBox.Text;
+            if (text.Length >= 50)
+            {
+                TitleTextBox.BackColor = Color.Red;
+            }
+            else TitleTextBox.BackColor = SystemColors.Window;
+        }
     }
 }

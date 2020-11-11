@@ -71,6 +71,7 @@
             this.TitleTextBox.Name = "TitleTextBox";
             this.TitleTextBox.Size = new System.Drawing.Size(708, 20);
             this.TitleTextBox.TabIndex = 2;
+            this.TitleTextBox.TextChanged += new System.EventHandler(this.TitleTextBox_TextChanged);
             // 
             // CategoryComboBox
             // 
@@ -157,7 +158,7 @@
             this.ExitCancelButton.UseVisualStyleBackColor = true;
             this.ExitCancelButton.Click += new System.EventHandler(this.ExitCancelButton_Click);
             // 
-            // Form3
+            // AddEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -174,7 +175,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.MinimumSize = new System.Drawing.Size(816, 492);
-            this.Name = "Form3";
+            this.Name = "AddEditForm";
             this.ShowIcon = false;
             this.Text = "Add/Edit Note";
             this.ResumeLayout(false);
