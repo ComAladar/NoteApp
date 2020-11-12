@@ -13,14 +13,23 @@ namespace NoteAppUI
 {
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Поле экземпляра класса проекта Project.
+        /// </summary>
         private Project _project=new Project();
 
+        /// <summary>
+        /// Возвращает и задает экземпляр класса Project.
+        /// </summary>
         public Project Project
         {
             get => _project;
             set => _project = value;
         }
 
+        /// <summary>
+        /// Считывание количества изменений в программе.
+        /// </summary>
         public int CountOfChanges;
 
         public MainForm()
@@ -107,7 +116,6 @@ namespace NoteAppUI
         private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditNoteButton_Click(sender, e);
-
         }
 
         private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)

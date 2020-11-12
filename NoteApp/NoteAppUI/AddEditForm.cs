@@ -13,9 +13,18 @@ namespace NoteAppUI
 {
     public partial class AddEditForm : Form
     {
+        /// <summary>
+        /// Поле класса Note для передачи данных.
+        /// </summary>
         private Note _note;
+        /// <summary>
+        /// Поле IsOK для подтверждения сохранения внесенных данных.
+        /// </summary>
         private bool _isOk;
 
+        /// <summary>
+        /// Свойство Note для отображения на форме данных записи.
+        /// </summary>
         public Note Note
         {
             get
@@ -33,6 +42,9 @@ namespace NoteAppUI
             }
         }
 
+        /// <summary>
+        /// Возвращает и задает результат нажатия кнопки.
+        /// </summary>
         public bool IsOK
         {
             get
