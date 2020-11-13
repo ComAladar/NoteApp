@@ -106,8 +106,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\icons8-add-file-32.png" />
+    <Content Include="Resources\icons8-add-property-24.png" />
+    <Content Include="Resources\icons8-delete-document-24.png" />
     <Content Include="Resources\icons8-delete-file-32.png" />
     <Content Include="Resources\icons8-edit-file-32.png" />
+    <Content Include="Resources\icons8-edit-property-24.png" />
     <Content Include="Resources\MainIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

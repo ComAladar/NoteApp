@@ -265,9 +265,9 @@
             this.DeleteNoteButton.FlatAppearance.BorderSize = 0;
             this.DeleteNoteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteNoteButton.Image = ((System.Drawing.Image)(resources.GetObject("DeleteNoteButton.Image")));
-            this.DeleteNoteButton.Location = new System.Drawing.Point(88, 412);
+            this.DeleteNoteButton.Location = new System.Drawing.Point(74, 412);
             this.DeleteNoteButton.Name = "DeleteNoteButton";
-            this.DeleteNoteButton.Size = new System.Drawing.Size(32, 32);
+            this.DeleteNoteButton.Size = new System.Drawing.Size(25, 25);
             this.DeleteNoteButton.TabIndex = 4;
             this.DeleteNoteButton.TabStop = false;
             this.DeleteNoteButton.UseVisualStyleBackColor = true;
@@ -279,9 +279,9 @@
             this.EditNoteButton.FlatAppearance.BorderSize = 0;
             this.EditNoteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EditNoteButton.Image = ((System.Drawing.Image)(resources.GetObject("EditNoteButton.Image")));
-            this.EditNoteButton.Location = new System.Drawing.Point(50, 412);
+            this.EditNoteButton.Location = new System.Drawing.Point(43, 412);
             this.EditNoteButton.Name = "EditNoteButton";
-            this.EditNoteButton.Size = new System.Drawing.Size(32, 32);
+            this.EditNoteButton.Size = new System.Drawing.Size(25, 25);
             this.EditNoteButton.TabIndex = 3;
             this.EditNoteButton.TabStop = false;
             this.EditNoteButton.UseVisualStyleBackColor = true;
@@ -295,7 +295,7 @@
             this.AddNoteButton.Image = ((System.Drawing.Image)(resources.GetObject("AddNoteButton.Image")));
             this.AddNoteButton.Location = new System.Drawing.Point(12, 412);
             this.AddNoteButton.Name = "AddNoteButton";
-            this.AddNoteButton.Size = new System.Drawing.Size(32, 32);
+            this.AddNoteButton.Size = new System.Drawing.Size(25, 25);
             this.AddNoteButton.TabIndex = 2;
             this.AddNoteButton.TabStop = false;
             this.AddNoteButton.UseVisualStyleBackColor = true;
