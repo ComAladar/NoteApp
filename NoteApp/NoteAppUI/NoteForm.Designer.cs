@@ -1,6 +1,6 @@
 ﻿namespace NoteAppUI
 {
-    partial class AddEditForm
+    partial class NoteForm
     {
         /// <summary>
         /// Required designer variable.
@@ -37,8 +37,8 @@
             this.CreatedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ModifiedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.NoteTextBox = new System.Windows.Forms.TextBox();
-            this.ExitOKButton = new System.Windows.Forms.Button();
-            this.ExitCancelButton = new System.Windows.Forms.Button();
+            this.OKButton = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -136,35 +136,35 @@
             this.NoteTextBox.Size = new System.Drawing.Size(763, 312);
             this.NoteTextBox.TabIndex = 8;
             // 
-            // ExitOKButton
+            // OKButton
             // 
-            this.ExitOKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExitOKButton.Location = new System.Drawing.Point(632, 424);
-            this.ExitOKButton.Name = "ExitOKButton";
-            this.ExitOKButton.Size = new System.Drawing.Size(75, 23);
-            this.ExitOKButton.TabIndex = 9;
-            this.ExitOKButton.Text = "OK";
-            this.ExitOKButton.UseVisualStyleBackColor = true;
-            this.ExitOKButton.Click += new System.EventHandler(this.ExitOKButton_Click);
+            this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.OKButton.Location = new System.Drawing.Point(632, 424);
+            this.OKButton.Name = "OKButton";
+            this.OKButton.Size = new System.Drawing.Size(75, 23);
+            this.OKButton.TabIndex = 9;
+            this.OKButton.Text = "OK";
+            this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
-            // ExitCancelButton
+            // CancelButton
             // 
-            this.ExitCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExitCancelButton.Location = new System.Drawing.Point(713, 424);
-            this.ExitCancelButton.Name = "ExitCancelButton";
-            this.ExitCancelButton.Size = new System.Drawing.Size(75, 23);
-            this.ExitCancelButton.TabIndex = 10;
-            this.ExitCancelButton.Text = "Cancel";
-            this.ExitCancelButton.UseVisualStyleBackColor = true;
-            this.ExitCancelButton.Click += new System.EventHandler(this.ExitCancelButton_Click);
+            this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CancelButton.Location = new System.Drawing.Point(713, 424);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelButton.TabIndex = 10;
+            this.CancelButton.Text = "Cancel";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // AddEditForm
+            // NoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 453);
-            this.Controls.Add(this.ExitCancelButton);
-            this.Controls.Add(this.ExitOKButton);
+            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.OKButton);
             this.Controls.Add(this.NoteTextBox);
             this.Controls.Add(this.ModifiedDateTimePicker);
             this.Controls.Add(this.CreatedDateTimePicker);
@@ -175,7 +175,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.MinimumSize = new System.Drawing.Size(816, 492);
-            this.Name = "AddEditForm";
+            this.Name = "NoteForm";
             this.ShowIcon = false;
             this.Text = "Add/Edit Note";
             this.ResumeLayout(false);
@@ -194,7 +194,7 @@
         private System.Windows.Forms.DateTimePicker CreatedDateTimePicker;
         private System.Windows.Forms.DateTimePicker ModifiedDateTimePicker;
         private System.Windows.Forms.TextBox NoteTextBox;
-        private System.Windows.Forms.Button ExitOKButton;
-        private System.Windows.Forms.Button ExitCancelButton;
+        private System.Windows.Forms.Button OKButton;
+        private System.Windows.Forms.Button CancelButton;
     }
 }

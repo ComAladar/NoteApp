@@ -16,26 +16,92 @@ namespace NoteAppUI
         /// <summary>
         /// Поле экземпляра класса проекта Project.
         /// </summary>
-        private Project _project=new Project();
+        private Project _project = new Project();
 
         /// <summary>
         /// Возвращает и задает экземпляр класса Project.
         /// </summary>
-        public Project Project
+        private Project Project
         {
             get => _project;
             set => _project = value;
         }
 
         /// <summary>
-        /// Считывание количества изменений в программе.
+        /// Метод добавления заметки.
         /// </summary>
-        public int CountOfChanges;
+        private void AddNote()
+        {
+            NoteForm noteForm = new NoteForm();
+            noteForm.Note = new Note();
+            noteForm.ShowDialog();
+            if (noteForm.DialogResult == DialogResult.OK)
+            {
+                var updatedNote = noteForm.Note;
+                Project.Notes.Add(updatedNote);
+                NotesListBox.Items.Add(updatedNote.Name);
+                ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
+            }
+        }
+
+        /// <summary>
+        /// Метод редактирования заметки.
+        /// </summary>
+        private void EditNote()
+        {
+            var index = NotesListBox.SelectedIndex;
+            if (index == -1)
+            {
+                return;
+            }
+            NoteForm noteForm = new NoteForm();
+            noteForm.Note = Project.Notes[index];
+            noteForm.ShowDialog();
+            if (noteForm.DialogResult == DialogResult.OK)
+            {
+                NotesListBox.Items.RemoveAt(index);
+                NotesListBox.Items.Insert(index, noteForm.Note.Name);
+                NoteTitleTextBox.Text = noteForm.Note.Name;
+                NoteTextBox.Text = noteForm.Note.Text;
+                CategotyTextBox.Text = noteForm.Note.Category.ToString();
+                ModifiedDateTimePicker.Value = noteForm.Note.Modified;
+                NotesListBox.SelectedIndex = index;
+                ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
+            }
+
+        }
+
+        /// <summary>
+        /// Метод удаления заметки.
+        /// </summary>
+        private void DeleteNote()
+        {
+            if (NotesListBox.SelectedIndex == -1)
+            {
+                return;
+            }
+            DialogResult deleteResult = MessageBox.Show("Вы точно хотите удалить запись? Название Записи: " + NotesListBox.Text, "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (deleteResult == DialogResult.OK)
+            {
+                Project.Notes.RemoveAt(NotesListBox.SelectedIndex);
+                NotesListBox.Items.RemoveAt(NotesListBox.SelectedIndex);
+                NoteTitleTextBox.Text = "Название Заметки";
+                NoteTextBox.Text = "";
+                CategotyTextBox.Text = "Наименование Категории";
+                ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
+            }
+        }
 
         public MainForm()
         {
             InitializeComponent();
-            CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
+            var categories = Enum.GetValues(typeof(NoteCategory));
+            for (int i = 0; i < categories.Length; i++)
+            {
+                CategoryComboBox.Items.Add(categories.GetValue(i));
+            }
+            CategoryComboBox.Items.Add("All");
+            CategoryComboBox.SelectedIndex = 7;
             Project = ProjectManager.LoadFromFile(ProjectManager.DefaultFilePath);
             foreach (var item in Project.Notes)
             {
@@ -43,64 +109,19 @@ namespace NoteAppUI
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void AddNoteButton_Click(object sender, EventArgs e)
         {
-            AddEditForm f3 = new AddEditForm();
-            f3.Note=new Note();
-            f3.ShowDialog();
-            if (f3.IsOK == true)
-            {
-                var updatedNote = f3.Note;
-                Project.Notes.Add(updatedNote);
-                NotesListBox.Items.Add(updatedNote.Name);
-                CountOfChanges++;
-            }
+            AddNote();
         }
 
         private void EditNoteButton_Click(object sender, EventArgs e)
         {
-            AddEditForm f3 = new AddEditForm();
-            if (NotesListBox.SelectedIndex == -1)
-            {
-                return;
-            }
-            f3.Note = Project.Notes[NotesListBox.SelectedIndex];
-            f3.ShowDialog();
-            if(f3.IsOK==true)
-            {
-                var index = NotesListBox.SelectedIndex;
-                NotesListBox.Items.RemoveAt(index);
-                NotesListBox.Items.Insert(index,f3.Note.Name);
-                NoteTitleTextBox.Text = f3.Note.Name;
-                NoteTextBox.Text = f3.Note.Text;
-                CategotyTextBox.Text = f3.Note.Category.ToString();
-                ModifiedDateTimePicker.Value = f3.Note.Modified;
-                CountOfChanges++;
-            }
+            EditNote();
         }
 
         private void DeleteNoteButton_Click(object sender, EventArgs e)
         {
-            if (NotesListBox.SelectedIndex == -1)
-            {
-                return;
-            }
-            DialogResult deleteResult = MessageBox.Show("Вы точно хотите удалить запись? Название Записи: "+NotesListBox.Text, "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-            if (deleteResult==DialogResult.OK)
-            {
-                Project.Notes.RemoveAt(NotesListBox.SelectedIndex);
-                NotesListBox.Items.RemoveAt(NotesListBox.SelectedIndex);
-                CountOfChanges++;
-            }
-        }
-
-        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            DeleteNote();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -110,38 +131,36 @@ namespace NoteAppUI
 
         private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddNoteButton_Click(sender, e);
+            AddNote();
         }
 
         private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditNoteButton_Click(sender, e);
+            EditNote();
         }
 
         private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DeleteNoteButton_Click(sender, e);
+            DeleteNote();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutForm f2 = new AboutForm();
-            f2.ShowDialog();
+            AboutForm aboutForm = new AboutForm();
+            aboutForm.ShowDialog();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(CountOfChanges>0)
-            {
-                {
-                    DialogResult result = MessageBox.Show("Сохранить изменения?", "Изменения", MessageBoxButtons.OKCancel,
-                        MessageBoxIcon.Exclamation);
-                    if (result == DialogResult.OK)
+            DialogResult result = MessageBox.Show("Вы точно хотите выйти?", "Выход", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                    if (result != DialogResult.OK)
+                    {
+                        e.Cancel=true;
+                    }
+                    else
                     {
                         ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
                     }
-                }
-            }
         }
 
         private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -150,13 +169,12 @@ namespace NoteAppUI
             {
                 return;
             }
-            Note tempnote=new Note();
-            tempnote = Project.Notes[NotesListBox.SelectedIndex];
-            NoteTitleTextBox.Text = tempnote.Name;
-            NoteTextBox.Text = tempnote.Text;
-            CategotyTextBox.Text = tempnote.Category.ToString();
-            CreatedDateTimePicker.Value = (DateTime)tempnote.Created;
-            ModifiedDateTimePicker.Value = (DateTime)tempnote.Modified;
+            var note = Project.Notes[NotesListBox.SelectedIndex];
+            NoteTitleTextBox.Text = note.Name;
+            NoteTextBox.Text = note.Text;
+            CategotyTextBox.Text = note.Category.ToString();
+            CreatedDateTimePicker.Value = note.Created;
+            ModifiedDateTimePicker.Value = note.Modified;
         }
     }
 }

@@ -26,12 +26,12 @@ namespace NoteAppUI
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://github.com/ComAladar/NoteApp");
+            Process.Start(linkLabel2.Text);
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://icons8.com");
+            Process.Start(linkLabel3.Text);
         }
     }
 }

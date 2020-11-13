@@ -11,16 +11,12 @@ using NoteApp;
 
 namespace NoteAppUI
 {
-    public partial class AddEditForm : Form
+    public partial class NoteForm : Form
     {
         /// <summary>
         /// Поле класса Note для передачи данных.
         /// </summary>
         private Note _note;
-        /// <summary>
-        /// Поле IsOK для подтверждения сохранения внесенных данных.
-        /// </summary>
-        private bool _isOk;
 
         /// <summary>
         /// Свойство Note для отображения на форме данных записи.
@@ -37,54 +33,38 @@ namespace NoteAppUI
                 TitleTextBox.Text = _note.Name;
                 NoteTextBox.Text = _note.Text;
                 CategoryComboBox.SelectedIndex = (int) _note.Category;
-                CreatedDateTimePicker.Value = Note.Created;
-                ModifiedDateTimePicker.Value = Note.Modified;
+                CreatedDateTimePicker.Value = _note.Created;
+                ModifiedDateTimePicker.Value = _note.Modified;
             }
         }
 
-        /// <summary>
-        /// Возвращает и задает результат нажатия кнопки.
-        /// </summary>
-        public bool IsOK
-        {
-            get
-            {
-                return _isOk;
-            }
-
-            private set
-            {
-                _isOk = value;
-            }
-        }
-
-        public AddEditForm()
+        public NoteForm()
         {
             InitializeComponent();
             CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
         }
 
-        private void ExitOKButton_Click(object sender, EventArgs e)
+        private void OKButton_Click(object sender, EventArgs e)
         {
-            IsOK = true;
             try
             {
                 Note.Name = TitleTextBox.Text;
             }
             catch (ArgumentException)
             {
-                MessageBox.Show("Название записи не должно превышать 50 символов. Измените название.","", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Название записи не должно превышать 50 символов. Измените название.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             Note.Name = TitleTextBox.Text;
             Note.Text = NoteTextBox.Text;
             Note.Category = (NoteCategory)CategoryComboBox.SelectedIndex;
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void ExitCancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
-            IsOK = false;
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -95,7 +75,10 @@ namespace NoteAppUI
             {
                 TitleTextBox.BackColor = Color.Red;
             }
-            else TitleTextBox.BackColor = SystemColors.Window;
+            else
+            {
+                TitleTextBox.BackColor = SystemColors.Window;
+            }
         }
     }
 }
