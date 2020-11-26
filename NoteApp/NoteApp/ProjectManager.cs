@@ -65,7 +65,7 @@ namespace NoteApp
         }
 
         /// <summary>
-        /// Конструктор путей до директории и файлов приложения.
+        /// Конструктор путя до директории.
         /// </summary>
         static ProjectManager()
         {

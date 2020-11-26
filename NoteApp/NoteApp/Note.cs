@@ -103,15 +103,6 @@ namespace NoteApp
                 _modified = DateTime.Now;
             }
         }
-        
-        /// <summary>
-        /// Возвращает и задает последнее время редактирования заметки.
-        /// </summary>
-        public DateTime Modified
-        {
-            get { return _modified; }
-            set { _modified = value; }
-        }
 
         /// <summary>
         /// Возвращает время создания заметки.
@@ -120,6 +111,15 @@ namespace NoteApp
         {
             get { return _created; }
             set { _created = value; }
+        }
+
+        /// <summary>
+        /// Возвращает и задает последнее время редактирования заметки.
+        /// </summary>
+        public DateTime Modified
+        {
+            get { return _modified; }
+            set { _modified = value; }
         }
 
         public object Clone()
