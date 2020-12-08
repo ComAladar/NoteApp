@@ -5,7 +5,7 @@ using NoteApp;
 namespace NoteApp.UnitTests
 {
     [TestFixture]
-    public class NoteTest
+    public class NoteTests
     {
         private Note _note;
 

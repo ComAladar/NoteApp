@@ -1,10 +1,12 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using NoteApp;
+
 
 namespace NoteApp.UnitTests
 {
     [TestFixture]
-    public class ProjectTest
+    public class ProjectTests
     {
         private Project _project;
         private Note _note;
@@ -12,7 +14,7 @@ namespace NoteApp.UnitTests
         [SetUp]
         public void Setup()
         {
-            _project=new Project();
+            _project = new Project();
             _note = new Note();
         }
 
@@ -21,7 +23,7 @@ namespace NoteApp.UnitTests
         {
             _project.Notes.Add(_note);
             var actual = _project.Notes;
-            Assert.AreEqual(_project.Notes,actual,"Возвращение списка заметок было совершено с ошибкой.");
+            Assert.AreEqual(_project.Notes, actual, "Возвращение списка заметок было совершено с ошибкой.");
         }
 
         [Test(Description = "")]
@@ -29,7 +31,7 @@ namespace NoteApp.UnitTests
         {
             var expected = _project;
             _project = expected;
-            Assert.AreEqual(expected,_project,"Присваивание списка заметок было совершено с ошибкой.");
+            Assert.AreEqual(expected, _project, "Присваивание списка заметок было совершено с ошибкой.");
         }
 
     }

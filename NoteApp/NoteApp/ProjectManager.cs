@@ -29,7 +29,7 @@ namespace NoteApp
             JsonSerializer serializer = new JsonSerializer();
             serializer.NullValueHandling = NullValueHandling.Include;
             serializer.TypeNameHandling = TypeNameHandling.All;
-            serializer.Formatting = Formatting.None;
+            serializer.Formatting = Formatting.Indented;
             using (StreamWriter sw = new StreamWriter(fullFilename))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
@@ -50,7 +50,7 @@ namespace NoteApp
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.NullValueHandling = NullValueHandling.Include;
                 serializer.TypeNameHandling = TypeNameHandling.All;
-                serializer.Formatting = Formatting.None;
+                serializer.Formatting = Formatting.Indented;
                 using (StreamReader sr = new StreamReader(fullFilename))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {

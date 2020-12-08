@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace NoteApp
 {
@@ -30,7 +31,7 @@ namespace NoteApp
         /// <summary>
         /// Поле время создания заметки.
         /// </summary>
-        private DateTime _created=DateTime.Now;
+        private readonly DateTime _created=DateTime.Now;
 
         /// <summary>
         /// Поле время изменения заметки.
@@ -110,7 +111,6 @@ namespace NoteApp
         public DateTime Created
         {
             get { return _created; }
-            set { _created = value; }
         }
 
         /// <summary>
@@ -148,6 +148,19 @@ namespace NoteApp
             Name = name;
             Text = text;
             Category = category;
+        }
+        
+        /// <summary>
+        /// Конструктор для Сериализации.
+        /// </summary>
+        [JsonConstructor]
+        private Note(string name, string text, NoteCategory category, DateTime created, DateTime modified)
+        {
+            _name = name;
+            _text = text;
+            _category = category;
+            _created = created;
+            _modified = modified;
         }
     }
 }
