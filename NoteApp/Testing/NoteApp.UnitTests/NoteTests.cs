@@ -8,112 +8,218 @@ namespace NoteApp.UnitTests
     [TestFixture]
     public class NoteTests
     {
-        private Note _note;
-
-        private void CreateVoid()
+        private Note CreateNote()
         {
-            _note = new Note();
+            var note = new Note();
+            return note;
         }
-
 
         [Test]
         public void TestNameGet_CorrectValue()
         {
             //Setup
-            CreateVoid();
+            var note=CreateNote();
 
             //Act
+            note.Name = "Информация о корме для животного.";
+            var actual = note.Name;
 
             //Assert
-            _note.Name = "Информация о корме для животного.";
-            var actual = _note.Name;
-            Assert.AreEqual(_note.Name, actual, "Геттер возвращает неправильное название заметки.");
+            Assert.AreEqual(note.Name, actual, "Геттер возвращает неправильное название заметки.");
         }
 
-        [Test(Description = "Тест свойства Имя: Проверка присвоения правильного названия заметки.")]
+        [Test]
         public void TestNameSet_CorrectValue()
         {
-            var expected = "Информация о корме для животного";
-            _note.Name = expected;
-            Assert.AreEqual(expected, _note.Name, "Сеттер присваивает неправильное название заметки.");
+            //Setup
+            var note = CreateNote();
 
+            //Act
+            var expected = "Информация о корме для животного";
+            note.Name = expected;
+
+            //Assert
+            Assert.AreEqual(expected, note.Name, "Сеттер присваивает неправильное название заметки.");
         }
 
-        [Test(Description = "Тест свойства Имя: Проверка присвоения пустого названия заметки и задачей стандартного значения 'Без Названия'.")]
+        [Test]
         public void TestNameSet_EmptyString()
         {
+            //Setup
+            var note = CreateNote();
+
+            //Act
             var expected = "Без Названия";
-            _note.Name = "";
-            Assert.AreEqual(expected, _note.Name, "Сеттер не задает стандартное значение пустой строке названия заметки.");
+            note.Name = "";
+
+            //Assert
+            Assert.AreEqual(expected, note.Name, "Сеттер не задает стандартное значение пустой строке названия заметки.");
         }
 
-        [Test(Description = "Тест свойства Имя: Выброс исключения при присвоении названия заметки длинной более 50 символов.")]
+        [Test]
         public void TestNameSet_ArgumentException()
         {
+            //Setup
+            var note = CreateNote();
+
+            //Act
             var WrongName = "12345678901234567890123456789012345678901234567890123";
-            Assert.Throws<ArgumentException>((() => { _note.Name = WrongName; }), "У сеттера не происходит срабатывание ArgumentException.");
+
+            //Assert
+            Assert.Throws<ArgumentException>((() => { note.Name = WrongName; }), "У сеттера не происходит срабатывание ArgumentException.");
         }
 
-        [Test(Description = "Тест свойства Категория: Проверка возвращения заданной категории заметки.")]
+        [Test]
         public void TestCategoryGet_CorrectValue()
         {
-            _note.Category = NoteCategory.Home;
-            var actual = _note.Category;
-            Assert.AreEqual(_note.Category, actual, "Геттер возвращает неправильную категорию.");
+            //Setup
+            var note = CreateNote();
+
+            //Act
+            note.Category = NoteCategory.Home;
+            var actual = note.Category;
+
+            //Assert
+            Assert.AreEqual(note.Category, actual, "Геттер возвращает неправильную категорию.");
         }
 
-        [Test(Description = "Тест свойства Категория: Проверка присвоения заданной категории заметки.")]
+        [Test]
         public void TestCategorySet_CorrectValue()
         {
+            //Setup
+            var note = CreateNote();
+
+            //Act
             var expected = NoteCategory.Home;
-            _note.Category = expected;
-            Assert.AreEqual(expected, _note.Category, "Сеттер присваивает неправильную категорию.");
+            note.Category = expected;
+
+            //Assert
+            Assert.AreEqual(expected, note.Category, "Сеттер присваивает неправильную категорию.");
         }
 
-        [Test(Description = "Тест свойства Текст: Проверка возвращения заданной строки текста заметки.")]
+        [Test]
         public void TestTextGet_CorrectValue()
         {
-            _note.Text = "Текст";
-            var actual = _note.Text;
-            Assert.AreEqual(_note.Text, actual, "Геттер возвращает неправильную строку текста заметки.");
+            //Setup
+            var note = CreateNote();
+
+            //Act
+            note.Text = "Текст";
+            var actual = note.Text;
+
+            //Assert
+            Assert.AreEqual(note.Text, actual, "Геттер возвращает неправильную строку текста заметки.");
         }
 
-        [Test(Description = "Тест свойства Текст: Проверка присвоения заданной строки текста заметки.")]
+        [Test]
         public void TestTextSet_CorrectValue()
         {
-            var expected = _note.Text;
-            _note.Text = expected;
-            Assert.AreEqual(expected, _note.Text, "Сеттер присваивает неправильную строку текста заметки.");
+            //Setup
+            var note = CreateNote();
+
+            //Act
+            var expected = note.Text;
+            note.Text = expected;
+
+            //Assert
+            Assert.AreEqual(expected, note.Text, "Сеттер присваивает неправильную строку текста заметки.");
         }
 
-        [Test(Description = "Тест свойства Текст: Проверка присвоения пустой строки текста заметки и задачей стандартного значения 'Введите текст.'.")]
+        [Test]
         public void TestTextSet_EmptyString()
         {
+            //Setup
+            var note = CreateNote();
+
+            //Act
             var expected = "Введите текст.";
-            _note.Text = "";
-            Assert.AreEqual(expected, _note.Text, "Сеттер не задает стандартное значение строке текста.");
+            note.Text = "";
+
+            //Assert
+            Assert.AreEqual(expected, note.Text, "Сеттер не задает стандартное значение строке текста.");
         }
 
-        [Test(Description = "Тест свойства Время создания заметки: Проверки правильности возвращения время создания.")]
+        [Test]
         public void TestCreatedGet_CorrectValue()
         {
+            //Setup
+            var note = CreateNote();
+
+            //Act
             var expected = DateTime.Now;
             expected = new DateTime(expected.Year, expected.Month, expected.Day, expected.Hour, expected.Minute, expected.Second, expected.Kind);
-            var actual = _note.Created;
+            var actual = note.Created;
             actual = new DateTime(actual.Year, actual.Month, actual.Day, actual.Hour, actual.Minute, actual.Second, actual.Kind);
+
+            //Assert
             Assert.AreEqual(expected, actual, "Геттер возвращает не правильное время создания заметки.");
         }
 
-        [Test(Description = "Тест свойства Время редактирования заметки: Проверки правильности возвращения время редактирования.")]
+        [Test]
         public void TestModifiedGet_CorrectValue()
         {
-            _note.Name = "Первое название.";
-            var FirstEditTime = _note.Modified;
+            //Setup
+            var note = CreateNote();
+
+            //Act
+            note.Name = "Первое название.";
+            var FirstEditTime = note.Modified;
             Thread.Sleep(1000);
-            _note.Name = "Второе название.";
-            var SecondEditTime = _note.Modified;
-            Assert.AreNotEqual(FirstEditTime, SecondEditTime, "Сеттер не присваивает верное время изменения заметки.");
+            note.Name = "Второе название.";
+            var SecondEditTime = note.Modified;
+
+            //Assert
+            Assert.AreNotEqual(FirstEditTime, SecondEditTime, "Геттер не возвращает верное время изменения заметки.");
         }
 
+        [Test]
+        public void TestModifiedSet_CorrectValue()
+        {
+            //Setup
+            var note = CreateNote();
+
+            //Act
+            var expected = DateTime.Now;
+            note.Modified = expected;
+
+            //Assert
+            Assert.AreEqual(expected,note.Modified,"Сеттер не присваивает верно время изменения заметки.");
+        }
+
+        [Test]
+        public void TestClone_CorrectValue()
+        {
+            //Setup
+            var note = CreateNote();
+            note.Name = "НазваниеКлона";
+            note.Text = "ТекстКлона";
+            note.Category = NoteCategory.Documents;
+
+            //Act
+            Note clone = (Note)note.Clone();
+
+            //Assert
+            Assert.AreEqual(note.Name,clone.Name,"Имя было склонировано с ошибкой.");
+            Assert.AreEqual(note.Text, clone.Text, "Текст был склонирован с ошибкой.");
+            Assert.AreEqual(note.Category, clone.Category, "Категория была склонирована с ошибкой.");
+        }
+
+        [Test]
+        public void TestConstructor_CorrectValue()
+        {
+            //Setup
+            var note = CreateNote();
+            note.Name = "Название";
+            note.Text = "Текст";
+            note.Category = (NoteCategory) 0;
+
+            //Act
+            Note expectedNote = new Note("Название", "Текст", (NoteCategory)0);
+
+            //Assert
+            Assert.AreEqual(note.Name,expectedNote.Name, "Конструктор передал поле 'имя' с ошибкой.");
+            Assert.AreEqual(note.Text, expectedNote.Text, "Конструктор передал поле 'текст' с ошибкой.");
+            Assert.AreEqual(note.Category, expectedNote.Category, "Конструктор передал поле 'категория' с ошибкой.");
+        }
     }
 }
