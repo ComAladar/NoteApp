@@ -39,7 +39,25 @@ namespace NoteAppUI
             {
                 var updatedNote = noteForm.Note;
                 Project.Notes.Add(updatedNote);
-                EditAddListBoxRefill();
+                EditAddListBoxRefillNotes();
+                ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
+            }
+        }
+        private void AddNote(NoteCategory category)
+        {
+            NoteForm noteForm = new NoteForm();
+            noteForm.Note = new Note();
+            noteForm.ShowDialog();
+            if (noteForm.DialogResult == DialogResult.OK)
+            {
+                var updatedNote = noteForm.Note;
+                if (updatedNote.Category==category)
+                {
+                    Project.Notes.Add(updatedNote);
+                    Project.SortList(category);
+                    EditAddListBoxRefillCatNotes();
+                }
+                else Project.Notes.Add(updatedNote);
                 ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
             }
         }
@@ -65,11 +83,39 @@ namespace NoteAppUI
                 NoteTextBox.Text = noteForm.Note.Text;
                 CategotyTextBox.Text = noteForm.Note.Category.ToString();
                 ModifiedDateTimePicker.Value = noteForm.Note.Modified;
-                EditAddListBoxRefill();
-                NotesListBox.SelectedIndex = index;
+                EditAddListBoxRefillNotes();
+                NotesListBox.SelectedIndex = 0;
                 ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
             }
-
+        }
+        private void EditNote(NoteCategory category)
+        {
+            var index = NotesListBox.SelectedIndex;
+            if (index == -1)
+            {
+                return;
+            }
+            NoteForm noteForm = new NoteForm();
+            noteForm.Note = Project.CatNotes[index];
+            noteForm.ShowDialog();
+            if (noteForm.DialogResult == DialogResult.OK)
+            {
+                NotesListBox.Items.RemoveAt(index);
+                NotesListBox.Items.Insert(index, noteForm.Note.Name);
+                NoteTitleTextBox.Text = noteForm.Note.Name;
+                NoteTextBox.Text = noteForm.Note.Text;
+                CategotyTextBox.Text = noteForm.Note.Category.ToString();
+                ModifiedDateTimePicker.Value = noteForm.Note.Modified;
+                EditAddListBoxRefillCatNotes();
+                NotesListBox.SelectedIndex = 0;
+                ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
+                if (noteForm.Note.Category != category)
+                {
+                    Project.SortList(category);
+                    NotesListBox.Items.Clear();
+                    EditAddListBoxRefillCatNotes();
+                }
+            }
         }
 
         /// <summary>
@@ -89,6 +135,41 @@ namespace NoteAppUI
                 NoteTitleTextBox.Text = "Название Заметки";
                 NoteTextBox.Text = "";
                 CategotyTextBox.Text = "Наименование Категории";
+                ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
+            }
+        }
+
+        /// <summary>
+        /// Метод удаления заметки.
+        /// </summary>
+        private void DeleteNote(NoteCategory category)
+        {
+            if (NotesListBox.SelectedIndex == -1)
+            {
+                return;
+            }
+            var index = NotesListBox.SelectedIndex;
+            DialogResult deleteResult = MessageBox.Show("Вы точно хотите удалить запись? Название Записи: " + NotesListBox.Text, "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (deleteResult == DialogResult.OK)
+            {
+                var Note1 = Project.CatNotes[index];
+
+                    foreach (var item in Project.Notes)
+                    {
+                        if (Note1.Created == item.Created)
+                        {
+                            Project.Notes.Remove(item);
+                            break;
+                        }
+                    }
+
+                Project.CatNotes.RemoveAt(NotesListBox.SelectedIndex);
+                NotesListBox.Items.RemoveAt(NotesListBox.SelectedIndex);
+
+                NoteTitleTextBox.Text = "Название Заметки";
+                NoteTextBox.Text = "";
+                CategotyTextBox.Text = "Наименование Категории";
+
                 ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
             }
         }
@@ -124,7 +205,7 @@ namespace NoteAppUI
             }
         }
 
-        private void SortFillListBox()
+        private void SortFillListBoxNotes()
         {
             Project.SortList();
             foreach (var item in Project.Notes)
@@ -133,7 +214,7 @@ namespace NoteAppUI
             }
         }
 
-        private void ClearListBox()
+        private void ClearListBoxNotes()
         {
             foreach (var item in Project.Notes)
             {
@@ -141,17 +222,22 @@ namespace NoteAppUI
             }
         }
 
-        private void EditAddListBoxRefill()
+        private void EditAddListBoxRefillNotes()
         {
-            ClearListBox();
-            SortFillListBox();
+            ClearListBoxNotes();
+            SortFillListBoxNotes();
         }
 
+        /// <summary>
+        /// Используется в UI для отображения при смене категории.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="n"></param>
         private void CategoryComboBoxChanged(NoteCategory category,int n)
         {
             if (CategoryComboBox.SelectedIndex == n)
             {
-                ClearListBox();
+                ClearListBoxNotes();
                 Project.SortList(category);
                 foreach (var item in Project.CatNotes)
                 {
@@ -159,6 +245,28 @@ namespace NoteAppUI
                 }
                 Project.CurrentCategory = (int)category;
             }
+        }
+
+        private void SortFillListBoxCatNotes()
+        {
+            foreach (var item in Project.CatNotes)
+            {
+                NotesListBox.Items.Add(item.Name);
+            }
+        }
+
+        private void ClearListBoxCatNotes()
+        {
+            foreach (var item in Project.CatNotes)
+            {
+                NotesListBox.Items.Remove(item.Name);
+            }
+        }
+
+        private void EditAddListBoxRefillCatNotes()
+        {
+            ClearListBoxCatNotes();
+            SortFillListBoxCatNotes();
         }
 
         public MainForm()
@@ -172,23 +280,39 @@ namespace NoteAppUI
             CategoryComboBox.Items.Add("All");
             CategoryComboBox.SelectedIndex = 7;
             Project = ProjectManager.LoadFromFile(ProjectManager.DefaultFilePath);
-            SortFillListBox();
-            GetCurrentNote();
+            SortFillListBoxNotes();
+            if (Project.Notes.Count != 0)
+            {
+                GetCurrentCategory();
+                GetCurrentNote();
+            }
         }
 
         private void AddNoteButton_Click(object sender, EventArgs e)
         {
-            AddNote();
+            if (CategoryComboBox.SelectedIndex == 7)
+            {
+                AddNote();
+            }
+            else AddNote((NoteCategory)CategoryComboBox.SelectedIndex);
         }
 
         private void EditNoteButton_Click(object sender, EventArgs e)
         {
-            EditNote();
+            if (CategoryComboBox.SelectedIndex == 7)
+            {
+                EditNote();
+            }
+            else EditNote((NoteCategory)CategoryComboBox.SelectedIndex);
         }
 
         private void DeleteNoteButton_Click(object sender, EventArgs e)
         {
-            DeleteNote();
+            if (CategoryComboBox.SelectedIndex == 7)
+            {
+                DeleteNote();
+            }
+            else DeleteNote((NoteCategory)CategoryComboBox.SelectedIndex);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -198,17 +322,29 @@ namespace NoteAppUI
 
         private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddNote();
+            if (CategoryComboBox.SelectedIndex == 7)
+            {
+                AddNote();
+            }
+            else AddNote((NoteCategory)CategoryComboBox.SelectedIndex);
         }
 
         private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditNote();
+            if (CategoryComboBox.SelectedIndex == 7)
+            {
+                EditNote();
+            }
+            else EditNote((NoteCategory)CategoryComboBox.SelectedIndex);
         }
 
         private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DeleteNote();
+            if (CategoryComboBox.SelectedIndex == 7)
+            {
+                DeleteNote();
+            }
+            else DeleteNote((NoteCategory)CategoryComboBox.SelectedIndex);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -226,6 +362,7 @@ namespace NoteAppUI
                     }
                     else
                     {
+                        Project.CatNotes.Clear();
                         ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
                     }
         }
@@ -269,7 +406,20 @@ namespace NoteAppUI
             CategoryComboBoxChanged((NoteCategory)6, 6);
             if (CategoryComboBox.SelectedIndex == 7)
             {
-                EditAddListBoxRefill();
+                Project.CurrentCategory = CategoryComboBox.SelectedIndex;
+                EditAddListBoxRefillNotes();
+            }
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (CategoryComboBox.SelectedIndex == 7)
+                {
+                    DeleteNote();
+                }
+                else DeleteNote((NoteCategory)CategoryComboBox.SelectedIndex);
             }
         }
     }
