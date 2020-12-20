@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Tracing;
 using System.IO;
 using System.Reflection;
 using NUnit.Framework;
@@ -12,33 +13,24 @@ namespace NoteApp.UnitTests
         private Project CreateProject()
         {
             var project=new Project();
-            project.Notes.Add(new Note()
+            project.Notes.Add(new Note("Note", "Text", (NoteCategory)0, DateTime.MinValue)
                 {
-                    Name = "Note",
-                    Text = "Text;",
-                    Category = NoteCategory.People,
-                    
-                    
+                    Modified = DateTime.MinValue
                 }
             );
-            
-            project.Notes.Add(new Note()
+            project.Notes.Add(new Note("Note1", "Text1", (NoteCategory)1, DateTime.MinValue)
                 {
-                    Name = "Note1",
-                    Text = "Text1;",
-                    Category = NoteCategory.Finances
+                    Modified =DateTime.MinValue
                 }
             );
-
-            project.Notes.Add(new Note()
+            project.Notes.Add(new Note("Note2", "Text2", (NoteCategory)2, DateTime.MinValue)
                 {
-                    Name = "Note2",
-                    Text = "Text2;",
-                    Category = NoteCategory.Work
+                    Modified = DateTime.MinValue
                 }
             );
             return project;
         }
+
 
         private void PrepareExpectedProject(Project project)
         {
@@ -49,7 +41,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestSaveToFile()
+        public void SaveToFileCorrectProjectReturnCorrectProject()
         {
             //Setup
             var project = CreateProject();
@@ -64,16 +56,15 @@ namespace NoteApp.UnitTests
 
             //Act
             ProjectManager.SaveToFile(project,actualFilename);
-            var isFileExist = File.Exists(actualFilename);
 
             //Assert
             var actualFileContent = File.ReadAllText(actualFilename);
             var expectedFileContent = File.ReadAllText(expectedFilename);
-            Assert.AreNotEqual(expectedFileContent,actualFileContent,"Сохранение записи случилось с ошибкой.");
+            Assert.AreEqual(expectedFileContent,actualFileContent,"Сохранение записи случилось с ошибкой.");
         }
 
         [Test]
-        public void TestLoadFromFile_CorrectProject()
+        public void LoadFromFileCorrectProjectReturnCorrectProject()
         {
             //Setup
             var actualProject = CreateProject();
@@ -85,11 +76,11 @@ namespace NoteApp.UnitTests
             var expectedProject = ProjectManager.LoadFromFile(expectedFilename);
             var expectedFileContent = File.ReadAllText(expectedFilename);
             //Assert
-            Assert.AreNotEqual(expectedProject.Notes,actualProject.Notes,"Загрузка записи случилась с ошибкой.");
+            Assert.AreEqual(actualProject.Notes.ToString(),expectedProject.Notes.ToString(),"Загрузка записи случилась с ошибкой.");
         }
 
         [Test]
-        public void TestLoadFromFile_CorruptedProject()
+        public void LoadFromFileCorruptedProjectReturnEmptyProject()
         {
             //Setup
             var expectedProject=new Project();
@@ -104,7 +95,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestDefaultFilePathGet_CorrectValue()
+        public void DefaultFilePathGetCorrectValueReturnFilePath()
         {
             //Setup
             var expectedFilePath = ProjectManager.DefaultFilePath;

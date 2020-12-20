@@ -17,7 +17,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestNotesGet_CorrectValue()
+        public void NotesGetCorrectValueGetCorrectList()
         {
             //Setup
             var project = CreateProject();
@@ -31,7 +31,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestNotesSet_CorrectValue()
+        public void NotesSetCorrectValueReturnNotEmptyList()
         {
             //Setup
             var expectedProject = CreateProject();
@@ -50,41 +50,9 @@ namespace NoteApp.UnitTests
             Assert.AreNotEqual(expectedProject,actualProject, "Присваивание списка заметок было совершено с ошибкой.");
         }
 
+        
         [Test]
-        public void TestCatNotesGet_CorrectValue()
-        {
-            //Setup
-            var project = CreateProject();
-            //Act
-            project.CatNotes.Add(new Note());
-            var actual = project.CatNotes;
-            //Assert
-
-            Assert.AreEqual(project.CatNotes, actual, "Возвращение списка заметок было совершено с ошибкой.");
-        }
-
-        [Test]
-        public void TestCatNotesSet_CorrectValue()
-        {
-            //Setup
-            var expectedProject = CreateProject();
-            var actualProject = CreateProject();
-            actualProject.CatNotes.Add(new Note()
-            {
-                Name = "Note",
-                Text = "Text",
-                Category = NoteCategory.Documents
-            });
-
-            //Act
-            expectedProject.CatNotes = null;
-
-            //Assert
-            Assert.AreNotEqual(expectedProject, actualProject, "Присваивание списка заметок было совершено с ошибкой.");
-        }
-
-        [Test]
-        public void TestCorrectSortList()
+        public void SortListCorrectSortByCreatedTime()
         {
             //Setup
             var unsortedproject = CreateProject();
@@ -104,7 +72,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestCorrectSortListByCategory()
+        public void SortListCorrectSortByCategory()
         {
             //Setup
             var unsortedProject = CreateProject();
@@ -126,14 +94,14 @@ namespace NoteApp.UnitTests
 
             //Act
             sortedProject.Notes = unsortedProject.Notes;
-            sortedProject.SortList((NoteCategory)1);
+            sortedProject.Notes=sortedProject.SortList((NoteCategory) 1, sortedProject.Notes);
 
             //Assert
-            Assert.AreNotEqual(sortedProject.CatNotes,unsortedProject.Notes,"Сортировка списка по категориям была совершена с ошибкой.");
+            Assert.AreNotEqual(sortedProject,unsortedProject,"Сортировка списка по категориям была совершена с ошибкой.");
         }
 
         [Test]
-        public void TestCurrentNote_CorrectGetSet()
+        public void CurrentNoteCorrectGetSetCorrectValue()
         {
             //Setup
             var expectedProject = CreateProject();
@@ -146,12 +114,15 @@ namespace NoteApp.UnitTests
             expectedProject.CurrentNote = GetNote;
 
             //Assert
-            Assert.AreEqual(expectedNote,actualProject.CurrentNote,"Геттер счетчика работает с ошибкой.");
-            Assert.AreEqual(GetNote,expectedProject.CurrentNote,"Сеттер счетсчика работает с ошибкой.");
+            Assert.Multiple((() =>
+            {
+                Assert.AreEqual(expectedNote, actualProject.CurrentNote, "Геттер счетчика работает с ошибкой.");
+                Assert.AreEqual(GetNote, expectedProject.CurrentNote, "Сеттер счетсчика работает с ошибкой.");
+            }));
         }
 
         [Test]
-        public void TestCurrentCategory_CorrectGetSet()
+        public void CurrentCategoryCorrectGetSetCorrectValue()
         {
             //Setup
             var expectedProject = CreateProject();
@@ -164,8 +135,11 @@ namespace NoteApp.UnitTests
             expectedProject.CurrentNote = GetCategory;
 
             //Assert
-            Assert.AreEqual(expectedCategory, actualProject.CurrentCategory, "Геттер счетчика работает с ошибкой.");
-            Assert.AreEqual(GetCategory, expectedProject.CurrentCategory, "Сеттер счетчика работате с ошибкой.");
+            Assert.Multiple((() =>
+            {
+                Assert.AreEqual(expectedCategory, actualProject.CurrentCategory, "Геттер счетчика работает с ошибкой.");
+                Assert.AreEqual(GetCategory, expectedProject.CurrentCategory, "Сеттер счетчика работате с ошибкой.");
+            }));
         }
 
     }

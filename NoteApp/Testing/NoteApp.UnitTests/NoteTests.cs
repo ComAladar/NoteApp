@@ -15,7 +15,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestNameGet_CorrectValue()
+        public void NameGetCorrectValueReturnCorrectValue()
         {
             //Setup
             var note=CreateNote();
@@ -29,7 +29,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestNameSet_CorrectValue()
+        public void NameSetCorrectValueSetCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -43,7 +43,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestNameSet_EmptyString()
+        public void NameSetEmptyStringReturnDefaultString()
         {
             //Setup
             var note = CreateNote();
@@ -57,7 +57,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestNameSet_ArgumentException()
+        public void NameSetThrowsArgumentExceptionLongName()
         {
             //Setup
             var note = CreateNote();
@@ -70,7 +70,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestCategoryGet_CorrectValue()
+        public void CategoryGetCorrectValueReturnCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -84,7 +84,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestCategorySet_CorrectValue()
+        public void CategorySetCorrectValueSetCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -98,7 +98,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestTextGet_CorrectValue()
+        public void TextGetCorrectValueReturnCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -112,7 +112,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestTextSet_CorrectValue()
+        public void TextSetCorrectValueSetCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -126,7 +126,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestTextSet_EmptyString()
+        public void TextSetEmptyStringReturnDefaultString()
         {
             //Setup
             var note = CreateNote();
@@ -140,7 +140,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestCreatedGet_CorrectValue()
+        public void CreatedGetCorrectValueReturnCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -156,7 +156,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestModifiedGet_CorrectValue()
+        public void ModifiedGetCorrectValueReturnNotEqualValues()
         {
             //Setup
             var note = CreateNote();
@@ -173,7 +173,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestModifiedSet_CorrectValue()
+        public void ModifiedSetCorrectValueSetCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -187,7 +187,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TestClone_CorrectValue()
+        public void CloneCorrectValueReturnCorrectNote()
         {
             //Setup
             var note = CreateNote();
@@ -199,13 +199,16 @@ namespace NoteApp.UnitTests
             Note clone = (Note)note.Clone();
 
             //Assert
-            Assert.AreEqual(note.Name,clone.Name,"Имя было склонировано с ошибкой.");
-            Assert.AreEqual(note.Text, clone.Text, "Текст был склонирован с ошибкой.");
-            Assert.AreEqual(note.Category, clone.Category, "Категория была склонирована с ошибкой.");
+            Assert.Multiple((() =>
+            {
+                Assert.AreEqual(note.Name, clone.Name, "Имя было склонировано с ошибкой.");
+                Assert.AreEqual(note.Text, clone.Text, "Текст был склонирован с ошибкой.");
+                Assert.AreEqual(note.Category, clone.Category, "Категория была склонирована с ошибкой.");
+            }));
         }
 
         [Test]
-        public void TestConstructor_CorrectValue()
+        public void ConstructorCorrectValueReturnCorrectNote()
         {
             //Setup
             var note = CreateNote();
@@ -214,12 +217,15 @@ namespace NoteApp.UnitTests
             note.Category = (NoteCategory) 0;
 
             //Act
-            Note expectedNote = new Note("Название", "Текст", (NoteCategory)0);
+            Note expectedNote = new Note("Название", "Текст", (NoteCategory)0,DateTime.Now);
 
             //Assert
-            Assert.AreEqual(note.Name,expectedNote.Name, "Конструктор передал поле 'имя' с ошибкой.");
-            Assert.AreEqual(note.Text, expectedNote.Text, "Конструктор передал поле 'текст' с ошибкой.");
-            Assert.AreEqual(note.Category, expectedNote.Category, "Конструктор передал поле 'категория' с ошибкой.");
+            Assert.Multiple((() =>
+            {
+                Assert.AreEqual(note.Name, expectedNote.Name, "Конструктор передал поле 'имя' с ошибкой.");
+                Assert.AreEqual(note.Text, expectedNote.Text, "Конструктор передал поле 'текст' с ошибкой.");
+                Assert.AreEqual(note.Category, expectedNote.Category, "Конструктор передал поле 'категория' с ошибкой.");
+            }));
         }
     }
 }

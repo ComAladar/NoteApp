@@ -6,32 +6,28 @@
       {
         "$type": "NoteApp.Note, NoteApp",
         "Name": "Note",
-        "Category": 3,
-        "Text": "Text;",
-        "Created": "2020-12-09T19:52:46.4452949+07:00",
-        "Modified": "2020-12-09T19:52:46.4452949+07:00"
+        "Category": 0,
+        "Text": "Text",
+        "Created": "0001-01-01T00:00:00",
+        "Modified": "0001-01-01T00:00:00"
       },
       {
         "$type": "NoteApp.Note, NoteApp",
         "Name": "Note1",
-        "Category": 5,
-        "Text": "Text1;",
-        "Created": "2020-12-09T19:52:46.4452949+07:00",
-        "Modified": "2020-12-09T19:52:46.4452949+07:00"
+        "Category": 1,
+        "Text": "Text1",
+        "Created": "0001-01-01T00:00:00",
+        "Modified": "0001-01-01T00:00:00"
       },
       {
         "$type": "NoteApp.Note, NoteApp",
         "Name": "Note2",
-        "Category": 0,
-        "Text": "Text2;",
-        "Created": "2020-12-09T19:52:46.4452949+07:00",
-        "Modified": "2020-12-09T19:52:46.4452949+07:00"
+        "Category": 2,
+        "Text": "Text2",
+        "Created": "0001-01-01T00:00:00",
+        "Modified": "0001-01-01T00:00:00"
       }
     ]
-  },
-  "CatNotes": {
-    "$type": "System.Collections.Generic.List`1[[NoteApp.Note, NoteApp]], mscorlib",
-    "$values": []
   },
   "CurrentNote": 0,
   "CurrentCategory": 0

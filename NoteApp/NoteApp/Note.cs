@@ -137,17 +137,20 @@ namespace NoteApp
         /// </summary>
         public Note() { }
 
+
         /// <summary>
-        /// Конструктор класса Note с заданием названия, текста и категории.
+        /// Конструктор класса Note с заданием названия, текста ,категории и время создания.
         /// </summary>
-        /// <param name="name">Название заметки.</param>
-        /// <param name="text">Текст заметки.</param>
-        /// <param name="category">Категория заметки.</param>
-        public Note(string name,string text,NoteCategory category)
+        /// <param name="name"></param>
+        /// <param name="text"></param>
+        /// <param name="category"></param>
+        /// <param name="created"></param>
+        public Note(string name,string text,NoteCategory category,DateTime created)
         {
             Name = name;
             Text = text;
             Category = category;
+            _created = created;
         }
         
         /// <summary>

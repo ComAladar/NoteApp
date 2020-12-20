@@ -15,8 +15,7 @@ namespace NoteApp
         /// Свойство Notes для создания списка заметок.
         /// </summary>
         public List<Note> Notes { get; set; } = new List<Note>();
-        public List<Note> CatNotes { get; set; } = new List<Note>();
-
+       
         /// <summary>
         /// Метод сортирует список записей по последнему редактированию.
         /// </summary>
@@ -30,10 +29,10 @@ namespace NoteApp
         /// Метод сортирует список записей определенной категории по последнему редактированию.
         /// </summary>
         /// <param name="category"></param>
-        public void SortList(NoteCategory category)
+        public List<Note> SortList(NoteCategory category,List<Note> viewedList)
         { 
-            var SortList = Notes.Where(item => item.Category==category).OrderByDescending(item=>item.Modified).ToList();
-            CatNotes = SortList;
+            viewedList = Notes.Where(item => item.Category==category).OrderByDescending(item=>item.Modified).ToList();
+            return viewedList;
         }
 
         /// <summary>
