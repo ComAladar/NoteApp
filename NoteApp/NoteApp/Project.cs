@@ -19,10 +19,10 @@ namespace NoteApp
         /// <summary>
         /// Метод сортирует список записей по последнему редактированию.
         /// </summary>
-        public void SortList()
+        public List<Note> SortList(List<Note> viewedList)
         {
-            var SortList = Notes.OrderByDescending(item => item.Modified).ToList();
-            Notes = SortList;
+            viewedList = Notes.OrderByDescending(item => item.Modified).ToList();
+            return viewedList;
         }
 
         /// <summary>

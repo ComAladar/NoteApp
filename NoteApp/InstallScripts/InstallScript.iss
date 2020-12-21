@@ -28,6 +28,7 @@ Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 OutputDir= Installers
+UsePreviousAppDir= no
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

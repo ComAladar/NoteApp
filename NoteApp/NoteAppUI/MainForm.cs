@@ -54,14 +54,14 @@ namespace NoteAppUI
             {
                 var updatedNote = noteForm.Note;
                 Project.Notes.Add(updatedNote);
-                Project.SortList();
                 if (updatedNote.Category == (NoteCategory) category)
                 {
                     ViewedNotes=Project.SortList((NoteCategory) category, ViewedNotes);
-                    EditAddListBoxRefillViewedNotes();
+                    EditAddListBoxRefillNotes();
                 }
                 if(category==7)
                 {
+                    ViewedNotes = Project.SortList(ViewedNotes);
                     EditAddListBoxRefillNotes();
                 }
                 ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
@@ -86,18 +86,17 @@ namespace NoteAppUI
             {
                 if (category == 7)
                 {
-                    Project.SortList();
+                    ViewedNotes = Project.SortList(ViewedNotes);
                     EditAddListBoxRefillNotes();
                 }
                 else
                 {
-                    Project.SortList();
                     ViewedNotes = Project.SortList((NoteCategory)category, ViewedNotes);
-                    EditAddListBoxRefillViewedNotes();
+                    EditAddListBoxRefillNotes();
                     if (noteForm.Note.Category != (NoteCategory)category)
                     {
                         ViewedNotes = Project.SortList((NoteCategory)category, ViewedNotes);
-                        EditAddListBoxRefillViewedNotes();
+                        EditAddListBoxRefillNotes();
                     }
                 }
                 ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
@@ -144,15 +143,15 @@ namespace NoteAppUI
                         break;
                     }
                 }
-                Project.SortList();
                 if (category == 7)
                 {
+                    ViewedNotes = Project.SortList(ViewedNotes);
                     EditAddListBoxRefillNotes();
                 }
                 else
                 {
                     ViewedNotes = Project.SortList((NoteCategory) category, ViewedNotes);
-                    EditAddListBoxRefillViewedNotes();
+                    EditAddListBoxRefillNotes();
                 }
                 ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
                 NoteTitleTextBox.Text = "Название Заметки";
@@ -196,7 +195,6 @@ namespace NoteAppUI
         /// </summary>
         private void SortFillListBoxNotes()
         {
-            ViewedNotes = Project.Notes;
             foreach (var item in ViewedNotes)
             {
                 NotesListBox.Items.Add(item.Name);
@@ -213,34 +211,20 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Метод добавления в ListBox временных заметок.
-        /// </summary>
-        private void FillListBoxViewedNotes()
-        {
-            foreach (var item in ViewedNotes)
-            {
-                NotesListBox.Items.Add(item.Name);
-            }
-        }
-
-        /// <summary>
-        /// Метод очистки и добавления в ListBox временных заметок.
-        /// </summary>
-        private void EditAddListBoxRefillViewedNotes()
-        {
-            NotesListBox.Items.Clear();
-            FillListBoxViewedNotes();
-        }
-
-        /// <summary>
         /// Используется в UI для отображения при смене категории.
         /// </summary>
         /// <param name="category"></param>
         private void CategoryComboBoxChanged(int category)
         {
-            Project.SortList();
-            ViewedNotes=Project.SortList((NoteCategory) category, ViewedNotes);
-            EditAddListBoxRefillViewedNotes();
+            if (CategoryComboBox.SelectedIndex == 7)
+            {
+                ViewedNotes = Project.SortList(ViewedNotes);
+            }
+            else
+            {
+                ViewedNotes = Project.SortList((NoteCategory)category, ViewedNotes);
+            }
+            EditAddListBoxRefillNotes();
             Project.CurrentCategory = category;
         }
 
@@ -254,9 +238,9 @@ namespace NoteAppUI
             }
             CategoryComboBox.Items.Add("All");
             CategoryComboBox.SelectedIndex = 7;
-
             Project = ProjectManager.LoadFromFile(ProjectManager.DefaultFilePath);
             ViewedNotes = Project.Notes;
+            ViewedNotes = Project.SortList(ViewedNotes);
             SortFillListBoxNotes();
             if (Project.Notes.Count != 0)
             {
@@ -339,7 +323,6 @@ namespace NoteAppUI
                     }
                     else
                     {
-                        Project.SortList();
                         ProjectManager.SaveToFile(Project, ProjectManager.DefaultFilePath);
                     }
         }

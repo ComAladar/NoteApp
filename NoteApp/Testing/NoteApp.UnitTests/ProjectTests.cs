@@ -65,7 +65,7 @@ namespace NoteApp.UnitTests
 
             //Act
             sortedproject.Notes = unsortedproject.Notes;
-            sortedproject.SortList();
+            sortedproject.Notes=sortedproject.SortList(sortedproject.Notes);
 
             //Assert
             Assert.AreNotEqual(unsortedproject,sortedproject,"Список заметок был отсортирован с ошибкой.");
