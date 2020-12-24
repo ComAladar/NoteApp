@@ -19,9 +19,9 @@ namespace NoteApp
         /// <summary>
         /// Метод сортирует список записей по последнему редактированию.
         /// </summary>
-        public List<Note> SortList(List<Note> viewedList)
+        public List<Note> SortList()
         {
-            viewedList = Notes.OrderByDescending(item => item.Modified).ToList();
+            var viewedList = Notes.OrderByDescending(item => item.Modified).ToList();
             return viewedList;
         }
 
@@ -29,9 +29,9 @@ namespace NoteApp
         /// Метод сортирует список записей определенной категории по последнему редактированию.
         /// </summary>
         /// <param name="category"></param>
-        public List<Note> SortList(NoteCategory category,List<Note> viewedList)
+        public List<Note> SortList(NoteCategory category)
         { 
-            viewedList = Notes.Where(item => item.Category==category).OrderByDescending(item=>item.Modified).ToList();
+            var viewedList = Notes.Where(item => item.Category==category).OrderByDescending(item=>item.Modified).ToList();
             return viewedList;
         }
 

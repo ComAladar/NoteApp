@@ -30,7 +30,9 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
-NoteApp/NoteApp/InstallScripts/Installers
+NoteApp/NoteApp/InstallScripts/Installers/*.exe
+NoteApp/NoteApp/InstallScripts/Release/.*dll
+NoteApp/NoteApp/InstallScripts/Release/.*exe
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
