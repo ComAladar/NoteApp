@@ -88,12 +88,7 @@
     <Error Condition="!Exists('..\packages\Tools.InnoSetup.6.1.2\build\Tools.InnoSetup.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Tools.InnoSetup.6.1.2\build\Tools.InnoSetup.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>md "$(SolutionDir)InstallScripts"
-md "$(SolutionDir)InstallScripts\Release"
-md "$(SolutionDir)InstallScripts\Installers"
-xcopy "$(SolutionDir)\NoteAppUI\bin\Debug\*.dll" "$(SolutionDir)InstallScripts\Release"
-xcopy "$(SolutionDir)\NoteAppUI\bin\Debug\*.exe" "$(SolutionDir)InstallScripts\Release"
-"$(SolutionDir)packages\Tools.InnoSetup.6.1.2\tools\ISCC.exe" "$(SolutionDir)InstallScripts\InstallScript.iss"
+    <PostBuildEvent>"$(SolutionDir)packages\Tools.InnoSetup.6.1.2\tools\ISCC.exe" "$(SolutionDir)InstallScripts\InstallScript.iss"
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
