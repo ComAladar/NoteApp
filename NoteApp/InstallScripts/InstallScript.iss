@@ -5,7 +5,7 @@
 #define MyAppVersion "1.0.0"
 #define MyAppPublisher "My Company, Inc."
 #define MyAppURL "https://github.com/ComAladar/NoteApp/"
-#define MyAppExeName "NoteApp.exe"
+#define MyAppExeName "NoteAppUI.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -38,9 +38,8 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "Release\NoteAppUI.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Release\NoteApp.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 

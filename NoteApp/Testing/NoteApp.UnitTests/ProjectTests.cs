@@ -17,7 +17,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void NotesGetCorrectValueGetCorrectList()
+        public void Notes_GetCorrectValue_GetCorrectList()
         {
             //Setup
             var project = CreateProject();
@@ -31,7 +31,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void NotesSetCorrectValueReturnNotEmptyList()
+        public void Notes_SetCorrectValue_ReturnNotEmptyList()
         {
             //Setup
             var expectedProject = CreateProject();
@@ -52,7 +52,7 @@ namespace NoteApp.UnitTests
 
         
         [Test]
-        public void SortListCorrectSortByCreatedTime()
+        public void SortList_CorrectSort_ByCreatedTime()
         {
             //Setup
             var unsortedproject = CreateProject();
@@ -72,7 +72,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void SortListCorrectSortByCategory()
+        public void SortList_CorrectSort_ByCategory()
         {
             //Setup
             var unsortedProject = CreateProject();
@@ -101,7 +101,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void CurrentNoteCorrectGetSetCorrectValue()
+        public void CurrentNote_CorrectGet_SetCorrectValue()
         {
             //Setup
             var expectedProject = CreateProject();
@@ -122,7 +122,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void CurrentCategoryCorrectGetSetCorrectValue()
+        public void CurrentCategory_CorrectGet_SetCorrectValue()
         {
             //Setup
             var expectedProject = CreateProject();

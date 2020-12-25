@@ -31,7 +31,10 @@ namespace NoteApp.UnitTests
             return project;
         }
 
-
+        /// <summary>
+        /// Метод для создания новых эталонных проектов для тестирования при изменении бизнес-логики.
+        /// </summary>
+        /// <param name="project"></param>
         private void PrepareExpectedProject(Project project)
         {
             var location = Assembly.GetExecutingAssembly().Location;
@@ -41,7 +44,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void SaveToFileCorrectProjectReturnCorrectProject()
+        public void SaveToFile_CorrectProject_ReturnCorrectProject()
         {
             //Setup
             var project = CreateProject();
@@ -64,7 +67,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void LoadFromFileCorrectProjectReturnCorrectProject()
+        public void LoadFromFile_CorrectProject_ReturnCorrectProject()
         {
             //Setup
             var actualProject = CreateProject();
@@ -80,7 +83,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void LoadFromFileCorruptedProjectReturnEmptyProject()
+        public void LoadFromFile_CorruptedProject_ReturnEmptyProject()
         {
             //Setup
             var expectedProject=new Project();
@@ -95,15 +98,16 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void DefaultFilePathGetCorrectValueReturnFilePath()
+        public void DefaultFilePath_GetCorrectValue_ReturnFilePath()
         {
             //Setup
-            var expectedFilePath = ProjectManager.DefaultFilePath;
+            var expectedFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NoteApp\NoteAppInfo.notes";
 
             //Act
+            var actualFilePath = ProjectManager.DefaultFilePath;
 
             //Assert
-            Assert.AreEqual(expectedFilePath,ProjectManager.DefaultFilePath,"Стандартный путь сохранения был ошибочный.");
+            Assert.AreEqual(expectedFilePath,actualFilePath,"Стандартный путь сохранения был ошибочный.");
         }
     }
 }

@@ -15,7 +15,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void NameGetCorrectValueReturnCorrectValue()
+        public void Name_GetCorrectValue_ReturnCorrectValue()
         {
             //Setup
             var note=CreateNote();
@@ -29,7 +29,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void NameSetCorrectValueSetCorrectValue()
+        public void Name_SetCorrectValue_SetCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -43,7 +43,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void NameSetEmptyStringReturnDefaultString()
+        public void Name_SetEmptyString_ReturnDefaultString()
         {
             //Setup
             var note = CreateNote();
@@ -57,7 +57,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void NameSetThrowsArgumentExceptionLongName()
+        public void Name_SetThrowsArgumentException_LongName()
         {
             //Setup
             var note = CreateNote();
@@ -70,7 +70,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void CategoryGetCorrectValueReturnCorrectValue()
+        public void Category_GetCorrectValue_ReturnCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -84,7 +84,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void CategorySetCorrectValueSetCorrectValue()
+        public void Category_SetCorrectValue_SetCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -98,7 +98,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TextGetCorrectValueReturnCorrectValue()
+        public void Text_GetCorrectValue_ReturnCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -112,7 +112,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TextSetCorrectValueSetCorrectValue()
+        public void Text_SetCorrectValue_SetCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -126,7 +126,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void TextSetEmptyStringReturnDefaultString()
+        public void Text_SetEmptyString_ReturnDefaultString()
         {
             //Setup
             var note = CreateNote();
@@ -140,7 +140,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void CreatedGetCorrectValueReturnCorrectValue()
+        public void Created_GetCorrectValue_ReturnCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -156,7 +156,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void ModifiedGetCorrectValueReturnNotEqualValues()
+        public void Modified_GetCorrectValue_ReturnNotEqualValues()
         {
             //Setup
             var note = CreateNote();
@@ -173,7 +173,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void ModifiedSetCorrectValueSetCorrectValue()
+        public void Modified_SetCorrectValue_SetCorrectValue()
         {
             //Setup
             var note = CreateNote();
@@ -187,7 +187,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void CloneCorrectValueReturnCorrectNote()
+        public void Clone_CorrectValue_ReturnCorrectNote()
         {
             //Setup
             var note = CreateNote();
@@ -208,7 +208,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test]
-        public void ConstructorCorrectValueReturnCorrectNote()
+        public void Constructor_CorrectValue_ReturnCorrectNote()
         {
             //Setup
             var note = CreateNote();
